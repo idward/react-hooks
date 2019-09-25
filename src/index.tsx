@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { FC, useReducer, useContext } from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './components/App';
+import AppContext from './context';
+import appReducer from './reducer';
+
+import TodoList from './components/TodoList';
+import TodoForm from './components/TodoForm';
+
+interface IAppProps {
+  [key: string]: any;
+}
+
+const App: FC<IAppProps> = () => {
+  const { initialState } = useContext(AppContext);
+  const [state, dispatch] = useReducer(appReducer, initialState);
+
+  return (
+    <AppContext.Provider value={{ state, dispatch }}>
+      <TodoForm />
+      <TodoList />
+    </AppContext.Provider>
+  );
+};
 
 declare let module: any;
 
-render(
-  <BrowserRouter>
-    <App message="World" />
-  </BrowserRouter>,
-  document.getElementById('root'),
-);
+render(<App />, document.getElementById('root'));
 
 if (module.hot) {
   module.hot.accept();

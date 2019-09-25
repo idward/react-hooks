@@ -69,23 +69,29 @@ module.exports = {
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
-      chunks: 'all',
-      maxInitialRequests: Infinity,
-      minSize: 0,
+      // chunks: 'all',
+      // maxInitialRequests: Infinity,
+      // minSize: 0,
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name(module) {
-            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-            return `npm.${packageName.replace('@', '')}`;
-          },
+          chunks: 'initial',
+          name: 'vendor',
+          enforce: true,
+          // name(module) {
+          //   const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+          //   return `npm.${packageName.replace('@', '')}`;
+          // },
         },
       },
     },
   },
   plugins: [
     new CleanWebpackPlugin({
+      root: __dirname,
+      verbose: true,
       dry: false,
+      cleanAfterEveryBuildPatterns: ['dist/main.*.js', 'dist/mainfest.*.js'],
     }),
     new ForkTsCheckerWebpackPlugin({ eslint: true }),
     new MiniCssExtractPlugin({

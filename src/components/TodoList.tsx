@@ -1,56 +1,43 @@
-import React, { useState, useRef, useReducer } from 'react';
+import React, { FC, useContext } from 'react';
+import AppContext from '../context';
+import { Todo, TodoConstant } from '../reducer/todo.reducer';
 
-interface ITodoListProps {
-  text: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+interface TodoListProps {
+  [key: string]: any;
 }
 
-interface Todo {
-  text: string;
-  complete: boolean;
-}
+const TodoList: FC<TodoListProps> = () => {
+  const { state, dispatch } = useContext(AppContext);
 
-interface AddAction {
-  type: 'add';
-  text: string;
-}
+  const setCurrentTodo = (currentTodo: Todo) => {
+    dispatch({ type: TodoConstant.SET_CURRENT_TODO, currentTodo });
+  };
 
-interface RemoveAction {
-  type: 'remove';
-  idx: number;
-}
-
-type Actions = AddAction | RemoveAction;
-
-const TodoReducer = (state: Todo[], action: Actions) => {
-  switch (action.type) {
-    case 'add':
-      return [...state, { text: action.text, complete: false }];
-    case 'remove':
-      return state.filter((_, i) => action.idx !== i);
-    default:
-      return state;
-  }
-};
-
-const TodoList: React.FC<ITodoListProps> = () => {
-  const [todoText, setTodoText] = useState<string>('');
-  const inputRef = useRef<HTMLInputElement>(null);
-  const divRef = useRef<HTMLDivElement>(null);
-  const [todos, dispatch] = useReducer(TodoReducer, []);
-
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTodoText(event.target.value);
+  const removeTodo = (todo: Todo) => {
+    dispatch({ type: TodoConstant.REMOVE_TODO, todo });
+    dispatch({ type: TodoConstant.REMOVE_CURRENT_TODO });
   };
 
   return (
-    <div ref={divRef}>
-      <input type="text" ref={inputRef} onChange={onChangeHandler} />
-      <button onClick={() => dispatch({ type: 'add', text: todoText })}>Add</button>
-      <hr />
+    <div>
       <ul>
-        {todos.map((todo: Todo, idx: number) => {
-          return <li key={idx}>{todo.text}</li>;
+        {state.todos.map((todo: Todo) => {
+          return (
+            <li key={todo.id}>
+              <span
+                style={{
+                  textDecoration: todo.complete ? 'line-through' : '',
+                  color: todo.complete ? 'grey' : 'black',
+                }}
+                onClick={() => dispatch({ type: TodoConstant.TOGGLE_TODO, todo })}>
+                {todo.text}
+              </span>
+              <span>
+                <button onClick={() => setCurrentTodo(todo)}>modify</button>
+                <button onClick={() => removeTodo(todo)}>delete</button>
+              </span>
+            </li>
+          );
         })}
       </ul>
     </div>
