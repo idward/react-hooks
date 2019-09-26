@@ -5,12 +5,18 @@ export interface Todo {
 }
 
 export enum TodoConstant {
+  'GET_TODOS' = 'GET_TODOS',
   'ADD_TODO' = 'ADD_TODO',
   'UPDATE_TODO' = 'UPDATE_TODO',
   'TOGGLE_TODO' = 'TOGGLE_TODO',
   'REMOVE_TODO' = 'REMOVE_TODO',
   'SET_CURRENT_TODO' = 'SET_CURRENT_TODO',
   'REMOVE_CURRENT_TODO' = 'REMOVE_CURRENT_TODO',
+}
+
+interface GetTodos {
+  type: TodoConstant.GET_TODOS;
+  todos: Todo[];
 }
 
 interface AddTodo {
@@ -42,11 +48,13 @@ interface RemoveCurrentTodo {
   type: TodoConstant.REMOVE_CURRENT_TODO;
 }
 
-type TodoAction = AddTodo | UpdateTodo | ToggleTodo | RemoveTodo;
+type TodoAction = GetTodos | AddTodo | UpdateTodo | ToggleTodo | RemoveTodo;
 type SelectTodoAction = SetCurrentTodo | RemoveCurrentTodo;
 
 export function TodosReducer(state: Todo[] = [], action: TodoAction) {
   switch (action.type) {
+    case TodoConstant.GET_TODOS:
+      return [...state, ...action.todos];
     case TodoConstant.ADD_TODO:
       return [...state, action.todo];
     case TodoConstant.UPDATE_TODO:

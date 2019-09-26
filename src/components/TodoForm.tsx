@@ -41,13 +41,15 @@ const TodoForm: FC<TodoFormProps> = () => {
   };
 
   useEffect(() => {
-    console.log('aaaa');
     if (currentTodo.text) {
       setValue(currentTodo.text);
     } else {
       setValue('');
     }
+    console.log('todoFormEffect');
   }, [currentTodo.text]);
+
+  console.log('todoForm');
 
   return (
     <form onSubmit={handleTodo}>

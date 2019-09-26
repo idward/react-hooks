@@ -7,7 +7,7 @@ interface TodoListProps {
 }
 
 const TodoList: FC<TodoListProps> = () => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state: {todos}, dispatch } = useContext(AppContext);
 
   const setCurrentTodo = (currentTodo: Todo) => {
     dispatch({ type: TodoConstant.SET_CURRENT_TODO, currentTodo });
@@ -18,10 +18,12 @@ const TodoList: FC<TodoListProps> = () => {
     dispatch({ type: TodoConstant.REMOVE_CURRENT_TODO });
   };
 
+  console.log(todos);
+
   return (
     <div>
       <ul>
-        {state.todos.map((todo: Todo) => {
+        { todos.length ? todos.map((todo: Todo) => {
           return (
             <li key={todo.id}>
               <span
@@ -38,7 +40,7 @@ const TodoList: FC<TodoListProps> = () => {
               </span>
             </li>
           );
-        })}
+        }) : <div>Loading...</div>}
       </ul>
     </div>
   );
