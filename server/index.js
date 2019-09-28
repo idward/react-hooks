@@ -15,11 +15,13 @@ const compiler = webpack(webpackConfig);
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
 // webpackDevMiddleware
+// servers from memory
 app.use(
   webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath,
     stats: { colors: true },
+    writeToDisk: true,
   }),
 );
 
