@@ -14,3 +14,23 @@ export const useFetch = (endpoint: string, initialValue: any) => {
 
   return data;
 };
+
+export const useDynamicTransition = ({ delay, length }: { delay: number; length: number }) => {
+  const [index, setIndex] = useState<number>(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const newIndex = index + 1 !== length ? index + 1 : 0;
+      setIndex(newIndex);
+    }, delay);
+
+    console.log('image changed: ', index);
+    console.log('delay:', delay);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [index, delay, length]);
+
+  return index;
+};
