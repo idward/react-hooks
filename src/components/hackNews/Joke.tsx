@@ -16,6 +16,8 @@ const Joke: FC<IJokeProps> = () => {
 
   const { setup, punchline } = joke;
 
+  console.log('Joke render');
+
   return (
     <div>
       <h3>Joke</h3>

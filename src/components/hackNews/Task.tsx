@@ -64,6 +64,8 @@ const Task: FC<ITaskProps> = () => {
     storeData({ tasks, completedTasks });
   }, [tasks, completedTasks]);
 
+  console.log('Task render');
+
   return (
     <div>
       <h3>Tasks</h3>

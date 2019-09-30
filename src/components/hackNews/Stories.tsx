@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useFetch } from './hooks';
-import styles from '../../index.css'
+import styles from '../../index.css';
 
 interface IStorriesProps {
   [key: string]: any;
@@ -8,6 +8,8 @@ interface IStorriesProps {
 
 const Stories: FC<IStorriesProps> = () => {
   const stories = useFetch('https://news-proxy-server.appspot.com/topstories', []);
+
+  console.log('Stories render');
 
   return (
     <div className={styles.Stories}>

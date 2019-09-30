@@ -3,6 +3,7 @@ import styles from '../../index.css';
 import Joke from './Joke';
 import Stories from './Stories';
 import Task from './Task';
+import Gallery from './Gallery';
 
 interface IHackNewsProps {
   [key: string]: any;
@@ -10,6 +11,7 @@ interface IHackNewsProps {
 
 const HackNews: FC<IHackNewsProps> = () => {
   const [userQuery, setUserQuery] = useState('');
+  const [showGallery, setShowGallery] = useState(true);
 
   const updateUserQuery = (event: SyntheticEvent<HTMLInputElement>) => {
     setUserQuery(event.currentTarget.value);
@@ -18,6 +20,10 @@ const HackNews: FC<IHackNewsProps> = () => {
 
   const searchQuery = () => {
     window.open(`https://google.com/search?q=${userQuery}`, '_blank');
+  };
+
+  const toggleShowGallery = () => {
+    setShowGallery(!showGallery);
   };
 
   return (
@@ -31,6 +37,9 @@ const HackNews: FC<IHackNewsProps> = () => {
       <Joke />
       <hr />
       <Task />
+      <hr />
+      {showGallery ? <Gallery /> : null}
+      <button onClick={toggleShowGallery}>{showGallery ? 'Hide' : 'Show'} Gallery</button>
       <hr />
       <Stories />
     </div>
