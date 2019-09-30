@@ -6,7 +6,11 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: 'Economica', sans-serif;
 }
 
@@ -92,4 +96,26 @@ button {
 
 .Jobs {
   text-align: left;
+}
+
+#form-container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+#form-container div.control > input {
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px 0;
+}
+
+#form-container div.control p.is-danger {
+  color: red;
+}
+
+
+#form-container div.control p.is-help {
+  font-size: 14px;
 }

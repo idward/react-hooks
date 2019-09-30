@@ -6,8 +6,12 @@ interface CssExports {
   'Matrix': string;
   'Stories': string;
   'completed-list': string;
+  'control': string;
   'delete-task': string;
   'form': string;
+  'form-container': string;
+  'is-danger': string;
+  'is-help': string;
   'multiform': string;
   'task-list': string;
 }
