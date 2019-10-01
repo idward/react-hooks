@@ -1,3 +1,4 @@
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
 @import url('https://fonts.googleapis.com/css?family=Economica|Roboto+Condensed');
 
 body {
@@ -118,4 +119,9 @@ button {
 
 #form-container div.control p.is-help {
   font-size: 14px;
+}
+
+.CreateReaction > span {
+  margin: 5px;
+  cursor: pointer;
 }

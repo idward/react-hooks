@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-import LoginForm from './components/form-validation';
+import HackNews from './components/hackNews';
 
 declare let module: any;
 
-render(<LoginForm />, document.getElementById('root'));
+render(<HackNews />, document.getElementById('root'));
 
 if (module.hot) {
   module.hot.accept();
