@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-import HighOrder from './components/hoc';
+import DragList from './components/dragger-list';
 
 declare let module: any;
 
-render(<HighOrder />, document.getElementById('root'));
+render(<DragList />, document.getElementById('root'));
 
 if (module.hot) {
   module.hot.accept();

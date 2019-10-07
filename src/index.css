@@ -116,7 +116,6 @@ button {
   color: red;
 }
 
-
 #form-container div.control p.is-help {
   font-size: 14px;
 }
@@ -124,4 +123,15 @@ button {
 .CreateReaction > span {
   margin: 5px;
   cursor: pointer;
+}
+
+.drag-list {
+  list-style: none;
+}
+
+.drag-list li {
+  width: 20px;
+  height: 20px;
+  border: 1px solid grey;
+  margin: 3px auto;
 }

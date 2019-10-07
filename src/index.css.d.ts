@@ -9,6 +9,7 @@ interface CssExports {
   'completed-list': string;
   'control': string;
   'delete-task': string;
+  'drag-list': string;
   'form': string;
   'form-container': string;
   'is-danger': string;
